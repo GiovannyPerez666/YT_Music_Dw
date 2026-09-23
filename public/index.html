@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YT Music Downloader Studio</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- RemixIcons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo-group">
+        <div class="logo-icon">
+          <i class="ri-disc-line spin-slow"></i>
+        </div>
+        <div>
+          <h1>YT Music Studio</h1>
+          <p class="subtitle">Descargador de alta fidelidad y gestor de cola en tiempo real</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-node"><i class="ri-nodejs-line"></i> Node.js Engine</span>
+        <span class="badge badge-status" id="connectionStatus"><i class="ri-pulse-line"></i> Conectado</span>
+      </div>
+    </header>
+
+    <!-- Search Controls Bar -->
+    <section class="search-panel glass-card">
+      <form id="searchForm" class="search-form">
+        <div class="input-group search-input-group">
+          <label for="artistInput"><i class="ri-user-search-line"></i> Cantante / Artista</label>
+          <div class="input-wrapper">
+            <i class="ri-search-2-line field-icon"></i>
+            <input type="text" id="artistInput" placeholder="Ej. Roberto Carlos, Bad Bunny, Queen..." required autocomplete="off">
+          </div>
+        </div>
+
+        <div class="input-group amount-group">
+          <label for="amountInput"><i class="ri-list-ordered"></i> Canciones</label>
+          <div class="input-wrapper">
+            <input type="number" id="amountInput" min="1" max="30" value="5">
+          </div>
+        </div>
+
+        <div class="input-group quality-group">
+          <label for="qualitySelect"><i class="ri-headphone-line"></i> Calidad MP3</label>
+          <div class="input-wrapper">
+            <select id="qualitySelect">
+              <option value="128">128 kbps (Estándar)</option>
+              <option value="192" selected>192 kbps (Recomendada)</option>
+              <option value="320">320 kbps (Alta Fidelidad)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" id="searchBtn" class="btn btn-primary">
+          <i class="ri-sparkling-fill"></i>
+          <span>Buscar Canciones</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="content-grid">
+      <!-- Left Column: Search Results -->
+      <section class="results-section glass-card">
+        <div class="section-header">
+          <div class="section-title">
+            <i class="ri-music-2-line"></i>
+            <h2>Resultados de Búsqueda</h2>
+            <span class="count-badge" id="resultsCount">0</span>
+          </div>
+          <div class="batch-actions" id="batchActions" style="display: none;">
+            <button id="selectAllBtn" class="btn btn-sm btn-ghost"><i class="ri-checkbox-multiple-line"></i> Seleccionar todo</button>
+            <button id="deselectAllBtn" class="btn btn-sm btn-ghost"><i class="ri-checkbox-blank-line"></i> Desmarcar</button>
+            <button id="downloadSelectedBtn" class="btn btn-sm btn-accent">
+              <i class="ri-download-cloud-2-line"></i>
+              <span>Añadir (<span id="selectedCount">0</span>) a la cola</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Initial Placeholder State -->
+        <div id="resultsPlaceholder" class="placeholder-box">
+          <i class="ri-search-eye-line placeholder-icon"></i>
+          <h3>Realiza una búsqueda</h3>
+          <p>Ingresa el nombre de un cantante o banda arriba para visualizar sus canciones principales antes de descargar.</p>
+        </div>
+
+        <!-- Loading Skeleton -->
+        <div id="resultsLoading" class="loading-box" style="display: none;">
+          <div class="spinner"></div>
+          <p>Buscando las mejores canciones en YouTube...</p>
+        </div>
+
+        <!-- Results List -->
+        <div id="resultsContainer" class="results-list" style="display: none;"></div>
+      </section>
+
+      <!-- Right Column: Download Queue -->
+      <section class="queue-section glass-card">
+        <div class="section-header">
+          <div class="section-title">
+            <i class="ri-download-2-line"></i>
+            <h2>Cola de Descargas</h2>
+            <span class="count-badge queue-count" id="queueCount">0</span>
+          </div>
+          <button id="clearCompletedBtn" class="btn btn-sm btn-ghost" title="Limpiar completadas">
+            <i class="ri-delete-bin-6-line"></i> Limpiar
+          </button>
+        </div>
+
+        <!-- Queue Empty State -->
+        <div id="queueEmpty" class="placeholder-box">
+          <i class="ri-inbox-archive-line placeholder-icon"></i>
+          <h3>Cola Vacía</h3>
+          <p>Las canciones seleccionadas aparecerán aquí con su estado y progreso en tiempo real.</p>
+        </div>
+
+        <!-- Queue Items List -->
+        <div id="queueContainer" class="queue-list" style="display: none;"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Socket.IO Client Lib -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

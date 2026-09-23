@@ -1,0 +1,16 @@
+# Dependencias de Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de musica descargados dinámicamente
+musica_*/
+*.mp3
+*.webm
+*.m4a
+
+# Sistema operativo y entorno
+.DS_Store
+Thumbs.db
+.env
