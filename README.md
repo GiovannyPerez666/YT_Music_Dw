@@ -41,3 +41,6 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado en tu sistema:
 4. **Abrir en el navegador:**
    Navega a [http://localhost:3000](http://localhost:3000)
 
+## 📄 Licencia
+
+MIT
