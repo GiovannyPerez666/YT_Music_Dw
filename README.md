@@ -2,7 +2,7 @@
 
 Un panel web moderno e interactivo construido con **Node.js, Express, Socket.IO y yt-dlp** para buscar, previsualizar y descargar música de YouTube en formato MP3 con calidad configurable (128k, 192k, 320k) y barra de progreso en tiempo real.
 
-![Interface Demo](public/index.html)
+
 
 ## 🚀 Características
 
