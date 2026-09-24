@@ -24,7 +24,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado en tu sistema:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/TU_USUARIO/YT_Music.git
+   git clone https://github.com/GiovannyPerez666/YT_Music.git
    cd YT_Music
    ```
 
